@@ -36,38 +36,17 @@
             <li>Визуализация экономических потоков</li>
             <li>Получение мотивационных советов и рекомендаций</li>
         </ul>
+        <div class="buttons-container">
+            <a href="record_spending.html" class="btn-large">Записать траты</a>
+            <button id="analyze-button" class="btn-large">Анализировать</button>
+        </div>
 
-        <!-- Форма для создания трат -->
-        <form id="spendings-form">
-            <h2>Введите данные о трате</h2>
-            <div class="form-group">
-                <label for="category">Дата:</label>
-                <input type="date" id="date" name="date" required>
-            </div>
-            <div class="form-group">
-                <label for="amount">Сумма:</label>
-                <input type="number" id="amount" name="amount" required>
-            </div>
-            <div class="form-group">
-                <label for="category">Категория:</label>
-                <select name="category" id="category" required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="description">Описание</label>
-                <input type="text" id="description" name="description" required>
-            </div>
-            <div class="form-group">
-                <button type="button" onclick="createExpense()">Отправить</button>
-            </div>
-        </form>
-
-        <div id="suggestions">
-            <h2>Рекомендации для вас</h2>
-            <ul id="suggestions-list"></ul>
+        <!-- Блок анализа -->
+        <div id="analyze-block" class="hidden">
+            <h2>Результаты анализа</h2>
+            <ul id="analysis-results">
+                <!-- Результаты будут добавлены здесь динамически -->
+            </ul>
         </div>
     </main>
     <footer>
@@ -80,41 +59,6 @@
             </ul>
         </nav>
     </footer>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script>
-        function createExpense() {
-            const date = document.getElementById('date').value;
-            const amount = parseFloat(document.getElementById('amount').value);
-            const description = document.getElementById('description').value;
-            const category = parseInt(document.getElementById('category').value);
-
-            fetch(`http://localhost:8000/api/create_expenses/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + localStorage.getItem('token')
-                },
-                body: JSON.stringify({
-                    userID: localStorage.getItem('user_id'),
-                    date: date,
-                    amount: amount,
-                    description: description,
-                    typeID: category
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.Success) {
-                    alert('Данные успешно введены.');
-                } else {
-                    throw "";
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Ввод данных не удался. Пожалуйста, убедитесь что все поля верно и попробуйте снова.');
-            });
-        }
-    </script>
+    <script src="assets/js/index.js"></script>
 </body>
 </html>

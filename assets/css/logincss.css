@@ -1,86 +1,57 @@
-*, ::before, ::after {
-    margin: 0px;
-    padding: 0px;
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-*, ::before, ::after {
-    box-sizing: inherit;
-}
-
 
 body {
-    margin: 0px;
-    color: rgba(0, 0, 0, 0.87);
-    font-family: "Plus Jakarta Display", Helvetica, Arial, sans-serif;
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 1.625;
-    background-color: rgb(248, 249, 250);
-}
-
-html {
-    -webkit-font-smoothing: antialiased;
-    box-sizing: border-box;
-    text-size-adjust: 100%;
-}
-
-div {
-    display: block;
-    unicode-bidi: isolate;
+    font-family: Arial, sans-serif;
+    background-color: #232323;
+    color: #fff;
 }
 
 .container {
-    width: 100vw;
-    max-width: 100%;
-    height: 100%;
-    min-height: 100vh;
-    opacity: 1;
-    background: linear-gradient(159.02deg, rgb(15, 18, 59) 14.25%, rgb(9, 13, 46) 56.45%, rgb(2, 5, 21) 86.14%) transparent;
-    color: rgb(52, 71, 103);
-    overflow-x: hidden;
-    position: relative;
+    max-width: 500px;
+    margin: 50px auto;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
 }
 
-.left_block{
-    height: 100%;
-    width: 50vw;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: 0;
-    opacity: 1;
-    background: transparent;
-    color: rgb(52, 71, 103);
-    overflow: hidden;
+h2 {
+    text-align: center;
 }
 
-@media (min-width: 768px) {
-    .left_block {
-        display: block;
-    }
+.form-group {
+    margin-bottom: 20px;
 }
 
-@media (min-width: 375px) {
-    .left_block {
-        display: none;
-    }
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
-@media (max-width: 1439.95px) {
-    .left_block {
-        margin-right: 100px;
-    }
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #444;
+    color: #fff;
 }
 
-.pic_container {
-    height: 100%;
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    flex-direction: column;
-    opacity: 1;
-    background: url(cyjfgjtrujrxfgjntj) center center / cover transparent;
-    color: rgb(52, 71, 103);
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-group button:hover {
+    background-color: #0056b3;
 }

@@ -1,4 +1,3 @@
-/* Общие стили для всех страниц */
 body {
     font-family: Arial, sans-serif;
     background-color: #232323;
@@ -26,7 +25,7 @@ header {
 }
 
 .logo-container .logo {
-    height: 50px;
+    height: 60px;
     width: auto;
     margin-right: 20px;
 }
@@ -36,10 +35,11 @@ header {
     text-decoration: none;
     padding: 10px 20px;
     margin-left: 20px;
+    font-size: 1.1em;
 }
 
 .logo-container a.nav-link:hover {
-    background-color: #333;
+    background-color: #444;
     border-radius: 5px;
 }
 
@@ -60,10 +60,12 @@ header {
     border: none;
     border-radius: 5px 0 0 5px;
     outline: none;
+    background-color: #555;
+    color: #fff;
 }
 
 .search-container button {
-    padding: 8px 10px;
+    padding: 8px 12px;
     background-color: #007bff;
     color: white;
     border: none;
@@ -72,11 +74,6 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.search-container button i {
-    color: white;
-    font-size: 16px;
 }
 
 .search-container button:hover {
@@ -90,6 +87,7 @@ header {
     text-decoration: none;
     border-radius: 5px;
     margin-left: 10px;
+    font-size: 1.1em;
 }
 
 .auth-buttons .btn:hover {
@@ -98,21 +96,66 @@ header {
 
 main {
     flex: 1;
-    padding: 20px 50px;
+    padding: 30px 50px;
+    text-align: center;
 }
 
 main h1 {
-    font-size: 2.5em;
+    font-size: 2.8em;
     margin-bottom: 20px;
 }
 
 main p, main ul {
-    font-size: 1.2em;
     line-height: 1.6;
 }
 
 main ul {
-    padding-left: 20px;
+    padding-left: 0;
+    list-style: none;
+}
+
+main ul li {
+    margin-bottom: 10px;
+}
+
+.buttons-container {
+    margin-top: 30px;
+}
+
+.btn-large {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    padding: 20px 40px;
+    text-decoration: none;
+    font-size: 1.5em;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.btn-large:hover {
+    background-color: #0056b3;
+}
+
+.hidden {
+    display: none;
+}
+
+#analyze-block {
+    margin-top: 30px;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+#analyze-block h2 {
+    text-align: center;
 }
 
 footer {
@@ -127,6 +170,7 @@ footer {
 
 footer p {
     margin: 0;
+    font-size: 0.9em;
 }
 
 footer nav ul {
@@ -138,7 +182,7 @@ footer nav ul {
 }
 
 footer nav ul li {
-    margin: 0 10px;
+    margin: 0 15px;
 }
 
 footer nav ul li a {
@@ -149,121 +193,3 @@ footer nav ul li a {
 footer nav ul li a:hover {
     text-decoration: underline;
 }
-
-/* Медиа-запросы для адаптивности */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .logo-container, .right-container {
-        width: 100%;
-        justify-content: space-between;
-    }
-    .right-container {
-        margin-top: 10px;
-    }
-    main {
-        padding: 20px;
-    }
-}
-
-/* Дополнительные стили для страницы логина и регистрации */
-.container {
-    max-width: 500px;
-    margin: 50px auto;
-    background-color: #333;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-}
-
-.container h2 {
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #555;
-    border-radius: 4px;
-    background-color: #444;
-    color: #fff;
-}
-
-.form-group button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.form-group button:hover {
-    background-color: #0056b3;
-}
-
-.left_block {
-    height: 100%;
-    width: 50vw;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: 0;
-    opacity: 1;
-    background: transparent;
-    color: rgb(52, 71, 103);
-    overflow: hidden;
-}
-
-@media (min-width: 768px) {
-    .left_block {
-        display: block;
-    }
-}
-
-@media (min-width: 375px) {
-    .left_block {
-        display: none;
-    }
-}
-
-@media (max-width: 1439.95px) {
-    .left_block {
-        margin-right: 100px;
-    }
-}
-
-.pic_container {
-    height: 100%;
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    flex-direction: column;
-    opacity: 1;
-    background: url(assets/photos/body-background.9e7d96f6.png) center center / cover transparent;
-    color: rgb(52, 71, 103);
-}
-
-.pic_title {
-    font-size: 2em;
-    color: white;
-}
-
-.pic_title2 {
-    font-size: 3em;
-    color: white;
