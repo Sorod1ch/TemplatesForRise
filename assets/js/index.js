@@ -14,29 +14,39 @@ function getCookie(name) {
     return cookieValue;
 }
 
-document.getElementById("analyze-button").addEventListener("click", function () {
-    fetch(`http://localhost:8000/analyze/`, {
-        method: 'GET',
+document.getElementById("analyze-button").addEventListener("click", function() {
+    fetch(`http://localhost:7005/analyze/${localStorage.getItem('user_id')}`, {
+        method: 'POST',
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         }
     })
+    .then(response => response.json())
+    .then(_ => {
+        fetch(`http://localhost:8000/api/suggestion/${localStorage.getItem('user_id')}/`, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            }
+        })
         .then(response => response.json())
         .then(data => {
             const analysisResults = document.getElementById("analysis-results");
             analysisResults.innerHTML = ''; // Очищаем старые результаты
-            data.results.forEach(result => {
+            data.forEach(result => {
                 const listItem = document.createElement("li");
-                listItem.textContent = result;
+                listItem.textContent = `${result.suggestion_type} - вы сэкономите ${result.saved_money} руб.`;
                 analysisResults.appendChild(listItem);
             });
             document.getElementById("analyze-block").classList.remove("hidden");
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert("Не удалось загрузить результаты анализа.");
         });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Не удалось загрузить результаты анализа.");
+    });
 });
+
 
 document.addEventListener("DOMContentLoaded", function () {
     checkAuthStatus();

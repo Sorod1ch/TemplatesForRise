@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Получение категорий с бэка
-    fetch("http://localhost:8000/get_categories/", {
+    fetch("http://localhost:8000/api/get_expense_types/", {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -10,10 +10,10 @@ document.addEventListener("DOMContentLoaded", function() {
     .then(response => response.json())
     .then(data => {
         const categorySelect = document.getElementById("category");
-        data.categories.forEach(category => {
+        data.forEach(category => {
             const option = document.createElement("option");
-            option.value = category;
-            option.textContent = category;
+            option.value = category.id;
+            option.textContent = category.name;
             categorySelect.appendChild(option);
         });
     })
@@ -26,11 +26,11 @@ document.addEventListener("DOMContentLoaded", function() {
         event.preventDefault();
 
         var date = document.getElementById("date").value;
-        var amount = document.getElementById("amount").value;
+        var amount = parseFloat(document.getElementById("amount").value);
         var description = document.getElementById("description").value;
-        var category = document.getElementById("category").value;
+        var category = parseInt(document.getElementById("category").value);
 
-        fetch("http://localhost:8000/record_spending/", {
+        fetch("http://localhost:8000/api/create_expenses/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -40,13 +40,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 date: date,
                 amount: amount,
                 description: description,
-                category: category,
-                user_id: localStorage.getItem('user_id')
+                typeID: category,
+                userID: localStorage.getItem('user_id')
             })
         })
         .then(response => response.json())
         .then(data => {
-            alert(data.message);
+            if (data.Success) {
+                alert(data.Success);
+            } else {
+                throw "";
+            }
         })
         .catch(error => {
             console.error('Error:', error);
