@@ -39,7 +39,7 @@
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button type="button" class="login100-form-btn" onclick="submitLoginForm()">
+							<button type="button" class="login100-form-btn" onclick="login()">
 								Login
 							</button>
 						</div>
@@ -81,35 +81,64 @@
 			return cookieValue;
 		}
 
-		function submitLoginForm() {
-			const email = document.getElementById('email').value;
-			const password = document.getElementById('password').value;
-			const csrftoken = getCookie('csrftoken');
-
+		function login() {
+			const csrfToken = getCookie('csrftoken');
 			fetch('http://127.0.0.1:8000/api/login/', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					'X-CSRFToken': csrftoken
+					'X-CSRFToken': csrfToken
 				},
+				credentials: 'include',
 				body: JSON.stringify({
-					username: email,
-					password: password
+					username: document.getElementById('email').value,
+					password: document.getElementById('password').value
 				})
 			})
 				.then(response => response.json())
 				.then(data => {
 					if (data.message) {
-						alert(data.message);
-						window.location.href = 'index.html';
+						console.log('Login successful');
+						window.location.href = 'index.html';  // Redirect to the main page after successful login
 					} else {
-						alert(data.error);
+						console.error('Login failed:', data.error);
+						alert('Login failed. Please try again.'); // Display an alert if login fails
 					}
 				})
 				.catch(error => {
 					console.error('Error:', error);
 				});
 		}
+
+		function checkAuthStatus() {
+			fetch('http://127.0.0.1:8000/api/check_auth_status/', {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				credentials: 'include'
+			})
+				.then(response => response.json())
+				.then(data => {
+					const authButtons = document.getElementById('auth-buttons');
+					const profileButton = document.getElementById('profile-button');
+
+					if (data.isAuthenticated) {
+						authButtons.classList.add('hidden');
+						profileButton.classList.remove('hidden');
+					} else {
+						authButtons.classList.remove('hidden');
+						profileButton.classList.add('hidden');
+					}
+				})
+				.catch(error => {
+					console.error('Error:', error);
+				});
+		}
+
+		document.addEventListener("DOMContentLoaded", function () {
+			checkAuthStatus();
+		});
 	</script>
 </body>
 
